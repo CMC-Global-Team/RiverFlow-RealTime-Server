@@ -42,7 +42,14 @@ export const sendVerificationEmailValidation = [
     .trim()
     .notEmpty()
     .withMessage('Frontend URL is required')
-    .isURL()
+    .isURL({
+      protocols: ['http', 'https'],
+      require_protocol: true,
+      require_valid_protocol: true,
+      allow_underscores: true,
+      allow_trailing_dot: false,
+      allow_protocol_relative_urls: false,
+    })
     .withMessage('Invalid frontend URL'),
 ];
 
@@ -63,7 +70,14 @@ export const sendResetPasswordEmailValidation = [
     .trim()
     .notEmpty()
     .withMessage('Frontend URL is required')
-    .isURL()
+    .isURL({
+      protocols: ['http', 'https'],
+      require_protocol: true,
+      require_valid_protocol: true,
+      allow_underscores: true,
+      allow_trailing_dot: false,
+      allow_protocol_relative_urls: false,
+    })
     .withMessage('Invalid frontend URL'),
 ];
 
