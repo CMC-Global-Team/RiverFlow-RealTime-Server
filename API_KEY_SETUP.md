@@ -2,7 +2,7 @@
 
 ## 📌 Current Configuration
 
-- **SMTP Server URL**: https://river-flow-smtp-server-t3zk.vercel.app
+- **SMTP Server URL**: https://river-flow-smtp-server.vercel.app
 - **API Key**: `riverflow-smtp-secure-key-2024`
 
 ## 🔐 Security Best Practices
@@ -64,10 +64,10 @@ Sau đó cập nhật ở cả 2 nơi:
 
 ```bash
 # Test health check (không cần API key)
-curl https://river-flow-smtp-server-t3zk.vercel.app/api/email/health
+curl https://river-flow-smtp-server.vercel.app/api/email/health
 
 # Test send email (cần API key)
-curl -X POST https://river-flow-smtp-server-t3zk.vercel.app/api/email/send \
+curl -X POST https://river-flow-smtp-server.vercel.app/api/email/send \
   -H "Content-Type: application/json" \
   -H "X-API-Key: riverflow-smtp-secure-key-2024" \
   -d '{

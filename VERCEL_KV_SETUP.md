@@ -56,7 +56,7 @@ Once deployed:
 
 ```bash
 # Create a test API key
-curl -X POST https://river-flow-smtp-server-t3zk.vercel.app/api/keys \
+curl -X POST https://river-flow-smtp-server.vercel.app/api/keys \
   -H "Content-Type: application/json" \
   -H "X-Master-Key: master-riverflow-smtp-key-2024" \
   -d '{

@@ -24,7 +24,7 @@ MASTER_API_KEY=master-riverflow-smtp-key-2024
 ```bash
 # Thêm header X-Master-Key vào request
 curl -H "X-Master-Key: master-riverflow-smtp-key-2024" \
-  https://river-flow-smtp-server-t3zk.vercel.app/api/keys
+  https://river-flow-smtp-server.vercel.app/api/keys
 ```
 
 ## 📋 API Endpoints
@@ -63,7 +63,7 @@ curl -H "X-Master-Key: master-riverflow-smtp-key-2024" \
 
 **Example:**
 ```bash
-curl -X POST https://river-flow-smtp-server-t3zk.vercel.app/api/keys \
+curl -X POST https://river-flow-smtp-server.vercel.app/api/keys \
   -H "Content-Type: application/json" \
   -H "X-Master-Key: master-riverflow-smtp-key-2024" \
   -d '{
@@ -101,7 +101,7 @@ curl -X POST https://river-flow-smtp-server-t3zk.vercel.app/api/keys \
 
 **Example:**
 ```bash
-curl https://river-flow-smtp-server-t3zk.vercel.app/api/keys \
+curl https://river-flow-smtp-server.vercel.app/api/keys \
   -H "X-Master-Key: master-riverflow-smtp-key-2024"
 ```
 
@@ -154,7 +154,7 @@ Vô hiệu hóa API key (có thể reactivate sau)
 
 **Example:**
 ```bash
-curl -X PUT https://river-flow-smtp-server-t3zk.vercel.app/api/keys/1699876543210/revoke \
+curl -X PUT https://river-flow-smtp-server.vercel.app/api/keys/1699876543210/revoke \
   -H "X-Master-Key: master-riverflow-smtp-key-2024"
 ```
 
@@ -177,7 +177,7 @@ Kích hoạt lại API key đã bị revoke
 
 **Example:**
 ```bash
-curl -X PUT https://river-flow-smtp-server-t3zk.vercel.app/api/keys/1699876543210/reactivate \
+curl -X PUT https://river-flow-smtp-server.vercel.app/api/keys/1699876543210/reactivate \
   -H "X-Master-Key: master-riverflow-smtp-key-2024"
 ```
 
@@ -200,7 +200,7 @@ Xóa vĩnh viễn API key (không thể khôi phục)
 
 **Example:**
 ```bash
-curl -X DELETE https://river-flow-smtp-server-t3zk.vercel.app/api/keys/1699876543210 \
+curl -X DELETE https://river-flow-smtp-server.vercel.app/api/keys/1699876543210 \
   -H "X-Master-Key: master-riverflow-smtp-key-2024"
 ```
 
@@ -212,7 +212,7 @@ curl -X DELETE https://river-flow-smtp-server-t3zk.vercel.app/api/keys/169987654
 
 ```bash
 # Tạo key cho production server
-curl -X POST https://river-flow-smtp-server-t3zk.vercel.app/api/keys \
+curl -X POST https://river-flow-smtp-server.vercel.app/api/keys \
   -H "Content-Type: application/json" \
   -H "X-Master-Key: master-riverflow-smtp-key-2024" \
   -d '{
@@ -254,7 +254,7 @@ curl -X POST https://river-flow-smtp-server-t3zk.vercel.app/api/email/send \
 
 ```bash
 # Kiểm tra usage statistics
-curl https://river-flow-smtp-server-t3zk.vercel.app/api/keys \
+curl https://river-flow-smtp-server.vercel.app/api/keys \
   -H "X-Master-Key: master-riverflow-smtp-key-2024"
 ```
 
@@ -262,7 +262,7 @@ curl https://river-flow-smtp-server-t3zk.vercel.app/api/keys \
 
 ```bash
 # Nếu key bị compromise
-curl -X PUT https://river-flow-smtp-server-t3zk.vercel.app/api/keys/1699876543210/revoke \
+curl -X PUT https://river-flow-smtp-server.vercel.app/api/keys/1699876543210/revoke \
   -H "X-Master-Key: master-riverflow-smtp-key-2024"
 ```
 
@@ -365,12 +365,12 @@ data/api-keys.json
 
 ```bash
 # ✅ Valid master key
-curl https://river-flow-smtp-server-t3zk.vercel.app/api/keys \
+curl https://river-flow-smtp-server.vercel.app/api/keys \
   -H "X-Master-Key: master-riverflow-smtp-key-2024"
 # Expected: 200 OK
 
 # ❌ Invalid master key
-curl https://river-flow-smtp-server-t3zk.vercel.app/api/keys \
+curl https://river-flow-smtp-server.vercel.app/api/keys \
   -H "X-Master-Key: wrong-key"
 # Expected: 403 Forbidden
 
@@ -383,7 +383,7 @@ curl https://river-flow-smtp-server-t3zk.vercel.app/api/keys
 
 ```bash
 # Tạo key
-RESPONSE=$(curl -X POST https://river-flow-smtp-server-t3zk.vercel.app/api/keys \
+RESPONSE=$(curl -X POST https://river-flow-smtp-server.vercel.app/api/keys \
   -H "Content-Type: application/json" \
   -H "X-Master-Key: master-riverflow-smtp-key-2024" \
   -d '{"name":"Test Key","description":"For testing"}')
