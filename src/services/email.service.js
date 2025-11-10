@@ -15,8 +15,11 @@ class EmailService {
    */
   async sendEmail({ to, subject, html, text }) {
     try {
+      // Recreate transporter to ensure credentials are fresh
+      this.transporter = createTransporter();
+      
       const mailOptions = {
-        from: config.smtp.from,
+        from: config.smtp.from || config.smtp.user,
         to,
         subject,
         html,
@@ -32,6 +35,15 @@ class EmailService {
       };
     } catch (error) {
       console.error('Error sending email:', error);
+      
+      // Provide helpful error message
+      if (error.message.includes('Missing credentials') || error.message.includes('SMTP credentials')) {
+        throw new Error(
+          `SMTP configuration error: ${error.message}. ` +
+          `Please check environment variables SMTP_USER and SMTP_PASSWORD in Vercel Dashboard.`
+        );
+      }
+      
       throw new Error(`Failed to send email: ${error.message}`);
     }
   }

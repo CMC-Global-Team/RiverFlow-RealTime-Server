@@ -8,13 +8,28 @@ dotenv.config();
  * Tạo transporter để gửi email qua Gmail
  */
 export const createTransporter = () => {
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPassword = process.env.SMTP_PASSWORD;
+
+  // Validate credentials
+  if (!smtpUser || !smtpPassword) {
+    const missing = [];
+    if (!smtpUser) missing.push('SMTP_USER');
+    if (!smtpPassword) missing.push('SMTP_PASSWORD');
+    
+    throw new Error(
+      `SMTP credentials are missing. Please set the following environment variables: ${missing.join(', ')}. ` +
+      `Check Vercel Dashboard → Settings → Environment Variables.`
+    );
+  }
+
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: parseInt(process.env.SMTP_PORT) || 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
+      user: smtpUser,
+      pass: smtpPassword,
     },
     tls: {
       rejectUnauthorized: false,
