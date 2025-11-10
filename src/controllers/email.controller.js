@@ -34,6 +34,15 @@ class EmailController {
     try {
       const { to, token, frontendUrl } = req.body;
       
+      // Log for debugging
+      console.log('Verification email request:', {
+        to,
+        token: token ? `${token.substring(0, 10)}...` : 'missing',
+        frontendUrl,
+        frontendUrlType: typeof frontendUrl,
+        frontendUrlLength: frontendUrl?.length,
+      });
+      
       const result = await emailService.sendVerificationEmail({
         to,
         token,
@@ -53,6 +62,15 @@ class EmailController {
   async sendResetPasswordEmail(req, res, next) {
     try {
       const { to, token, frontendUrl } = req.body;
+      
+      // Log for debugging
+      console.log('Reset password email request:', {
+        to,
+        token: token ? `${token.substring(0, 10)}...` : 'missing',
+        frontendUrl,
+        frontendUrlType: typeof frontendUrl,
+        frontendUrlLength: frontendUrl?.length,
+      });
       
       const result = await emailService.sendResetPasswordEmail({
         to,
