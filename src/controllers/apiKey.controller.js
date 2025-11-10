@@ -20,7 +20,7 @@ class ApiKeyController {
         });
       }
 
-      const key = apiKeyModel.createKey(name, description);
+      const key = await apiKeyModel.createKey(name, description || '');
 
       res.status(201).json({
         success: true,
@@ -45,7 +45,7 @@ class ApiKeyController {
    */
   async getAllKeys(req, res, next) {
     try {
-      const keys = apiKeyModel.getAllKeys();
+      const keys = await apiKeyModel.getAllKeys();
 
       res.status(200).json({
         success: true,
@@ -65,7 +65,7 @@ class ApiKeyController {
     try {
       const { id } = req.params;
 
-      const success = apiKeyModel.revokeKey(id);
+      const success = await apiKeyModel.revokeKey(id);
 
       if (!success) {
         return res.status(404).json({
@@ -91,7 +91,7 @@ class ApiKeyController {
     try {
       const { id } = req.params;
 
-      const success = apiKeyModel.reactivateKey(id);
+      const success = await apiKeyModel.reactivateKey(id);
 
       if (!success) {
         return res.status(404).json({
@@ -117,7 +117,7 @@ class ApiKeyController {
     try {
       const { id } = req.params;
 
-      const success = apiKeyModel.deleteKey(id);
+      const success = await apiKeyModel.deleteKey(id);
 
       if (!success) {
         return res.status(404).json({
@@ -143,7 +143,7 @@ class ApiKeyController {
     try {
       const { id } = req.params;
 
-      const key = apiKeyModel.getKeyById(id);
+      const key = await apiKeyModel.getKeyById(id);
 
       if (!key) {
         return res.status(404).json({
