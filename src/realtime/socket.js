@@ -1,40 +1,10 @@
 import { Server } from 'socket.io'
-import fs from 'fs'
-import path from 'path'
 import jwt from 'jsonwebtoken'
 
-function parseProperties(filePath) {
-  const content = fs.readFileSync(filePath, 'utf8')
-  const lines = content.split(/\r?\n/)
-  const props = {}
-  for (const line of lines) {
-    const trimmed = line.trim()
-    if (!trimmed || trimmed.startsWith('#')) continue
-    const idx = trimmed.indexOf('=')
-    if (idx === -1) continue
-    const key = trimmed.slice(0, idx).trim()
-    let value = trimmed.slice(idx + 1).trim()
-    const envMatch = value.match(/\$\{([^:}]+)(?::([^}]*))?}/)
-    if (envMatch) {
-      const envKey = envMatch[1]
-      const fallback = envMatch[2]
-      value = process.env[envKey] || fallback || ''
-    }
-    props[key] = value
-  }
-  return props
-}
-
 function getBackendConfig() {
-  const propsPath = path.resolve(process.cwd(), '../RiverFlow-Server/src/main/resources/application-prod.properties')
-  let url = process.env.APP_BACKEND_URL
-  let jwtSecret = process.env.JWT_SECRET
-  if (fs.existsSync(propsPath)) {
-    const props = parseProperties(propsPath)
-    url = url || props['app.backend.url']
-    jwtSecret = jwtSecret || props['app.jwt.secret']
-  }
-  return { backendUrl: url, jwtSecret }
+  const backendUrl = process.env.APP_BACKEND_URL || 'https://riverflow-server.onrender.com/api'
+  const jwtSecret = process.env.JWT_SECRET || null
+  return { backendUrl, jwtSecret }
 }
 
 export function initRealtimeServer(httpServer, corsOrigins) {
@@ -119,4 +89,3 @@ export function initRealtimeServer(httpServer, corsOrigins) {
 }
 
 export default initRealtimeServer
-
